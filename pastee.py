@@ -24,8 +24,8 @@ class Paste(object):
 		self._url = "https://pastee.org" if self._ssl else "http://pastee.org"
 		self._posturl = self._url+"/submit"
 		self._content = kwargs.get("content", None)
-		if not self._content:
-			sys.exit("Cannot make a null post")
+		if not self._content or len(self._content) == self._content.count('\n'):
+			sys.exit("no files to upload and nothing or just newlines on stdin, go away:)")
 		self._lexer = kwargs.get("lexer", "text")
 		self._key = kwargs.get("key", None)
 		self._ttl = int(kwargs.get("ttl") * 86400)
